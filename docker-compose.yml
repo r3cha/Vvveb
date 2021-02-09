@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  app:
+    image: michael-rails-vue-app:latest
+    build:
+      dockerfile: docker/development/Dockerfile
+      context: .
+    env_file: docker/development/.env
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules:z
+    entrypoint: docker/entrypoint.sh
+    command: bundle exec puma -C config/puma.rb
+
+  webpacker:
+    image: michael-rails-vue-app:latest
+    env_file: docker/development/.env
+    working_dir: /app
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules:z
+    ports:
+      - 3035:3035
+    command: sh -c "yarn install && ./bin/webpack-dev-server"
+
+volumes:
+  node_modules:

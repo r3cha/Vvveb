@@ -1,0 +1,6 @@
+[submodule "vendor/vvvebjs"]
+	path = vendor/vvvebjs
+	url = git@github.com:givanz/VvvebJs.git
+[submodule "app/javascript/vvvebjs"]
+	path = app/javascript/vvvebjs
+	url = git@github.com:givanz/VvvebJs.git
